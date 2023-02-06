@@ -1,0 +1,62 @@
+﻿@page "/editelement/{Id}"
+@using SOMSBlazorApp.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<h2>Edit Element</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> Element Type *</label>
+            <input form="FirstName" class="form-control" @bind="@element.ElementType" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="LastName"> Width *</label>
+            <input form="LastName" class="form-control" @bind="@element.Width" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Email"> Height *</label>
+            <input form="Email" class="form-control" @bind="@element.Height" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Element element = new Element();
+    protected override async Task OnInitializedAsync()
+    {
+        element = await Http.GetFromJsonAsync<Element>("api/element/" + Id);
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PutAsJsonAsync("api/element/" + Id, @element);
+        bool elementResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (elementResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
+            NavigationManager.NavigateTo("elementlist");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("elementlist");
+    }
+
+}

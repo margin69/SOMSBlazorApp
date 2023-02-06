@@ -1,0 +1,59 @@
+﻿@page "/addelement"
+@using SOMSBlazorApp.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<h2>Add Element</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> Element Type *</label>
+            <input form="FirstName" class="form-control" @bind="@element.ElementType" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="LastName"> Width *</label>
+            <input form="LastName" class="form-control" @bind="@element.Width" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Email"> Height *</label>
+            <input form="Email" class="form-control" @bind="@element.Height" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+@code {
+    Element element = new Element();
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PostAsJsonAsync("api/Element", @element);
+        Element elementResponse = await response.Content.ReadFromJsonAsync<Element>();
+        if (elementResponse?.Id > 0)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            NavigationManager.NavigateTo("elementlist");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("elementlist");
+    }
+
+}
