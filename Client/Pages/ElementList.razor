@@ -4,40 +4,48 @@
 @inject HttpClient _httpClient
 
 <h1>Element Detail</h1>
-<div>
-    <a href="/addelement"> Create New Element</a>
-    @if (elementList != null)
-    {
-        <table class="table-bordered">
-            <thead>
-                <tr>
-                    <th width = "10%">ElementId</th>
-                    <th width = "20%">Type</th>
-                    <th width = "20%">Width</th>
-                    <th width=  "20%">Height</th>
-                    <th width = "30%">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in elementList)
-                {
+@if (elementList.Count < 1)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <a href="/addelement"> Create New Element</a>
+        @if (elementList != null)
+        {
+            <table class="table-bordered">
+                <thead>
                     <tr>
-                        <td>
-                            @p.Id
-                        </td>
-                    <td>@p.ElementType</td>
-                    <td>@p.Width</td>
-                        <td>@p.Height</td>
-                    <td>
-                        <a href="/editelement/@p.Id">Edit</a> |
-                        <a href="/deleteelement/@p.Id">Delete</a>
-                    </td>
+                        <th width="10%">ElementId</th>
+                        <th width="20%">Type</th>
+                        <th width="20%">Width</th>
+                        <th width="20%">Height</th>
+                        <th width="30%">Action</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    }
-</div>
+                </thead>
+                <tbody>
+                    @foreach (var p in elementList)
+                    {
+                        <tr>
+                            <td>
+                                @p.Id
+                            </td>
+                            <td>@p.ElementType</td>
+                            <td>@p.Width</td>
+                            <td>@p.Height</td>
+                            <td>
+                                <a href="/editelement/@p.Id">Edit</a> |
+                                <a href="/deleteelement/@p.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
+
 @code {
     List<Element> elementList = new List<Element>();
     protected override async Task OnInitializedAsync()
