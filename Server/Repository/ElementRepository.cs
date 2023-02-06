@@ -1,9 +1,10 @@
 ﻿using BlazorCRUDApp.Server.AppDbContext;
+using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Shared;
 
 namespace BlazorCRUDApp.Server.Repository
 {
-    public class ElementRepository : IRepository<Element>
+    public class ElementRepository : IElementRepository
     {
         ApplicationDbContext _dbContext;
         public ElementRepository(ApplicationDbContext applicationDbContext)

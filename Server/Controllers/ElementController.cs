@@ -1,6 +1,7 @@
 ﻿using SOMSBlazorApp.Shared;
 using Microsoft.AspNetCore.Mvc;
 using BlazorCRUDApp.Server.Services;
+using SOMSBlazorApp.Server.Services;
 
 namespace BlazorCRUDApp.Server.Controllers
 {
@@ -8,8 +9,8 @@ namespace BlazorCRUDApp.Server.Controllers
     [ApiController]
     public class ElementController : ControllerBase
     {
-        private readonly IService<Element> _elementService;
-        public ElementController(IService<Element> elementService)
+        private readonly IElementService _elementService;
+        public ElementController(IElementService elementService)
         {
             _elementService = elementService;
         }

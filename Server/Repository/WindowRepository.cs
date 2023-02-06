@@ -5,7 +5,7 @@ using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Repository
 {
-    public class WindowRepository : IRepository<Window>
+    public class WindowRepository : IWindowRepository
     {
         ApplicationDbContext _dbContext;
         public WindowRepository(ApplicationDbContext applicationDbContext)

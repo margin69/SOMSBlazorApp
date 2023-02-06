@@ -1,13 +1,14 @@
 ﻿using BlazorCRUDApp.Server.Repository;
 using BlazorCRUDApp.Server.Services;
+using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Services
 {
-    public class WindowService : IService<Window>
+    public class WindowService : IWindowService
     {
-        private readonly IRepository<Window> _window;
-        public WindowService(IRepository<Window> window)
+        private readonly IWindowRepository _window;
+        public WindowService(IWindowRepository window)
         {
             _window = window;
         }

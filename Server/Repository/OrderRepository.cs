@@ -4,7 +4,7 @@ using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Repository
 {
-    public class OrderRepository : IRepository<Order>
+    public class OrderRepository : IOrderRepository
     {
         ApplicationDbContext _dbContext;
         public OrderRepository(ApplicationDbContext applicationDbContext)

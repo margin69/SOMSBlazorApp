@@ -1,13 +1,14 @@
 ﻿using BlazorCRUDApp.Server.Repository;
 using BlazorCRUDApp.Server.Services;
+using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Services
 {
-    public class OrderService : IService<Order>
+    public class OrderService : IOrderService
     {
-        private readonly IRepository<Order> _order;
-        public OrderService(IRepository<Order> order)
+        private readonly IOrderRepository _order;
+        public OrderService(IOrderRepository order)
         {
             _order = order;
         }

@@ -1,13 +1,15 @@
 ﻿using BlazorCRUDApp.Server.Models;
 using BlazorCRUDApp.Server.Repository;
+using SOMSBlazorApp.Server.Repository;
+using SOMSBlazorApp.Server.Services;
 using SOMSBlazorApp.Shared;
 
 namespace BlazorCRUDApp.Server.Services
 {
-    public class ElementService : IService<Element>
+    public class ElementService : IElementService
     {
-        private readonly IRepository<Element> _element;
-        public ElementService(IRepository<Element> element)
+        private readonly IElementRepository _element;
+        public ElementService(IElementRepository element)
         {
             _element = element;
         }

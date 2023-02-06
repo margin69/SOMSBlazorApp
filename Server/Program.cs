@@ -21,12 +21,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 // For DI registration
-builder.Services.AddTransient<IRepository<Element>, ElementRepository>();
-builder.Services.AddTransient<IService<Element>, ElementService>();
-builder.Services.AddTransient<IRepository<Window>, WindowRepository>();
-builder.Services.AddTransient<IService<Window>, WindowService>();
-builder.Services.AddTransient<IRepository<Order>, OrderRepository>();
-builder.Services.AddTransient<IService<Order>, OrderService>();
+builder.Services.AddTransient<IElementRepository, ElementRepository>();
+builder.Services.AddTransient<IElementService, ElementService>();
+builder.Services.AddTransient<IWindowRepository, WindowRepository>();
+builder.Services.AddTransient<IWindowService, WindowService>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 var app = builder.Build();
 
