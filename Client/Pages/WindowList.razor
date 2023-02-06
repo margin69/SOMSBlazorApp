@@ -4,12 +4,9 @@
 @inject HttpClient _httpClient
 
 <h1>Window Detail</h1>
-@if (windowList.Count < 1)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
+
+ 
+
 <div>
     <a href="/addwindow"> Create New Window</a>
     @if (windowList != null)
@@ -44,7 +41,7 @@ else
         </table>
     }
 </div>
-}
+
 @code {
     List<Window> windowList = new List<Window>();
     protected override async Task OnInitializedAsync()

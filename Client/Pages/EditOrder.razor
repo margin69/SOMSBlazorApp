@@ -1,4 +1,4 @@
-﻿@page "/editwindow/{Id}"
+﻿@page "/editorder/{Id}"
 @using SOMSBlazorApp.Shared
 
 @inject HttpClient Http
@@ -6,32 +6,32 @@
 @inject IJSRuntime JsRuntime
 
 
-<h2>Add Window</h2>
+<h2>Add Order</h2>
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="FirstName"> Window Name *</label>
-            <input form="FirstName" class="form-control" @bind="@window.WindowName" />
+            <label for="FirstName"> Order Name *</label>
+            <input form="FirstName" class="form-control" @bind="@order.OrderName" />
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="LastName"> Quantity *</label>
-            <input form="LastName" class="form-control" @bind="@window.QuantityOfElement" />
+            <label for="LastName"> State *</label>
+            <input form="LastName" class="form-control" @bind="@order.State" />
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="Email"> Select Element *</label>
+            <label for="Email"> Select Window *</label>
             <select for="Publisher" class="form-control"
-                    @bind="@window.ElementId">
+                    @bind="@order.WindowId">
                 <option value=0 disabled selected hidden>
-                    [Select Element]
+                    [Select Window]
                 </option>
-                @foreach (var item in elements)
+                @foreach (var item in windows)
                 {
                     <option value="@item.Id">
-                        @item.ElementType
+                        @item.WindowName
                     </option>
                 }
             </select>
@@ -50,31 +50,31 @@
 @code {
     [Parameter]
     public string Id { get; set; }
-    Window window = new Window();
-    List<Element> elements = new List<Element>();
+    Order order = new Order();
+    List<Window> windows = new List<Window>();
     protected override async Task OnInitializedAsync()
     {
-        window = await Http.GetFromJsonAsync<Window>("api/window/" + Id);
+        order = await Http.GetFromJsonAsync<Order>("api/order/" + Id);
 
-        var response = await Http.GetAsync("api/element");
+        var response = await Http.GetAsync("api/window");
         response.EnsureSuccessStatusCode();
-        elements = await response.Content.ReadFromJsonAsync<List<Element>>();
-        
+        windows = await response.Content.ReadFromJsonAsync<List<Window>>();
+
     }
     protected async Task Save()
     {
-        var response = await Http.PutAsJsonAsync("api/window/" + Id, @window);
-        bool windowResponse = await response.Content.ReadFromJsonAsync<bool>();
-        if (windowResponse)
+        var response = await Http.PutAsJsonAsync("api/order/" + Id, @order);
+        bool orderResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (orderResponse)
         {
             await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
-            NavigationManager.NavigateTo("windowlist");
+            NavigationManager.NavigateTo("orderlist");
         }
 
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("windowlist");
+        NavigationManager.NavigateTo("orderlist");
     }
 
 }

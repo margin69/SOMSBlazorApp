@@ -1,0 +1,73 @@
+﻿@page "/addorder"
+@using SOMSBlazorApp.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<h2>Add Order</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> Order Name *</label>
+            <input form="FirstName" class="form-control" @bind="@order.OrderName" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="LastName"> State *</label>
+            <input form="LastName" class="form-control" @bind="@order.State" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Email"> Select Window *</label>
+            <select for="Publisher" class="form-control"
+                    @bind="@order.WindowId">
+                <option value=0 disabled selected hidden>
+                    [Select Window]
+                </option>
+                @foreach (var item in windows)
+                {
+                    <option value="@item.Id">
+                        @item.WindowName
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+@code {
+    Order order = new Order();
+    List<Window> windows = new List<Window>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetAsync("api/window");
+        response.EnsureSuccessStatusCode();
+        windows = await response.Content.ReadFromJsonAsync<List<Window>>();
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PostAsJsonAsync("api/Order", @order);
+        Order orderResponse = await response.Content.ReadFromJsonAsync<Order>();
+        if (orderResponse?.Id > 0)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            NavigationManager.NavigateTo("orderlist");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("orderlist");
+    }
+
+}

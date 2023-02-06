@@ -4,12 +4,7 @@
 @inject HttpClient _httpClient
 
 <h1>Element Detail</h1>
-@if (elementList.Count < 1)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
+
     <div>
         <a href="/addelement"> Create New Element</a>
         @if (elementList != null)
@@ -44,7 +39,7 @@ else
             </table>
         }
     </div>
-}
+
 
 @code {
     List<Element> elementList = new List<Element>();

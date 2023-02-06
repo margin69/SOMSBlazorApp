@@ -8,40 +8,40 @@ namespace SOMSBlazorApp.Server.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderService _windowService;
-        public OrderController(IOrderService windowService)
+        private readonly IOrderService _orderService;
+        public OrderController(IOrderService orderService)
         {
-            _windowService = windowService;
+            _orderService = orderService;
         }
 
         [HttpGet]
         public async Task<List<Order>> GetAll()
         {
-            return await _windowService.GetAll();
+            return await _orderService.GetAll();
         }
 
         [HttpGet("{id}")]
         public async Task<Order> Get(int id)
         {
-            return await _windowService.Get(id);
+            return await _orderService.Get(id);
         }
 
         [HttpPost]
-        public async Task<Order> AddOrder([FromBody] Order window)
+        public async Task<Order> AddOrder([FromBody] Order order)
         {
-            return await _windowService.Add(window);
+            return await _orderService.Add(order);
         }
 
         [HttpDelete("{id}")]
         public async Task<bool> DeleteOrder(int id)
         {
-            await _windowService.Delete(id); return true;
+            await _orderService.Delete(id); return true;
         }
 
         [HttpPut("{id}")]
         public async Task<bool> UpdateOrder(int id, [FromBody] Order Object)
         {
-            await _windowService.Update(id, Object); return true;
+            await _orderService.Update(id, Object); return true;
         }
     }
 }
