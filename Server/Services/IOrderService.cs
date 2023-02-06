@@ -1,5 +1,4 @@
-﻿using BlazorCRUDApp.Server.Services;
-using SOMSBlazorApp.Shared;
+﻿using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Services
 {

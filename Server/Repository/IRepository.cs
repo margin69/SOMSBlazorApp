@@ -1,4 +1,4 @@
-﻿namespace BlazorCRUDApp.Server.Repository
+﻿namespace SOMSBlazorApp.Server.Repository
 {
     public interface IRepository<T>
     {

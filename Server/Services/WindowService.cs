@@ -1,6 +1,4 @@
-﻿using BlazorCRUDApp.Server.Repository;
-using BlazorCRUDApp.Server.Services;
-using SOMSBlazorApp.Server.Repository;
+﻿using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Services

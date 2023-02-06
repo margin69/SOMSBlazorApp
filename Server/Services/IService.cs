@@ -1,4 +1,4 @@
-﻿namespace BlazorCRUDApp.Server.Services
+﻿namespace SOMSBlazorApp.Server.Services
 {
     public interface IService<T>
     {

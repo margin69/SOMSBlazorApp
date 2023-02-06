@@ -1,9 +1,8 @@
-﻿using BlazorCRUDApp.Server.Repository;
-using SOMSBlazorApp.Shared;
+﻿using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Repository
 {
-    public interface IElementRepository: IRepository<Element>
+    public interface IElementRepository : IRepository<Element>
     {
     }
 }

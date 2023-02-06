@@ -1,10 +1,8 @@
-﻿using BlazorCRUDApp.Server.Models;
-using BlazorCRUDApp.Server.Repository;
-using SOMSBlazorApp.Server.Repository;
+﻿using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Server.Services;
 using SOMSBlazorApp.Shared;
 
-namespace BlazorCRUDApp.Server.Services
+namespace SOMSBlazorApp.Server.Services
 {
     public class ElementService : IElementService
     {
@@ -18,12 +16,12 @@ namespace BlazorCRUDApp.Server.Services
             return await _element.CreateAsync(element);
         }
 
-        public async Task<bool> Update(int id, Element element) 
+        public async Task<bool> Update(int id, Element element)
         {
             var data = await _element.GetByIdAsync(id);
 
             if (data != null)
-            {  
+            {
                 data.ElementType = element.ElementType;
                 data.Width = element.Width;
                 data.Height = element.Height;

@@ -1,7 +1,6 @@
-﻿using SOMSBlazorApp.Shared;
-using Microsoft.AspNetCore.Mvc;
-using BlazorCRUDApp.Server.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 using SOMSBlazorApp.Server.Services;
+using SOMSBlazorApp.Shared;
 
 namespace BlazorCRUDApp.Server.Controllers
 {
@@ -30,7 +29,7 @@ namespace BlazorCRUDApp.Server.Controllers
         [HttpPost]
         public async Task<Element> AddElement([FromBody] Element element)
         {
-           return await _elementService.Add(element);
+            return await _elementService.Add(element);
         }
 
         [HttpDelete("{id}")]

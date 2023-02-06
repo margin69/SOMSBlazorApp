@@ -1,6 +1,4 @@
-﻿using BlazorCRUDApp.Server.AppDbContext;
-using BlazorCRUDApp.Server.Repository;
-using Microsoft.EntityFrameworkCore;
+﻿using SOMSBlazorApp.Server.AppDbContext;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Repository

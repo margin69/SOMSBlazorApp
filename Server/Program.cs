@@ -1,11 +1,7 @@
 global using Microsoft.EntityFrameworkCore;
-using BlazorCRUDApp.Server.AppDbContext;
-using BlazorCRUDApp.Server.Models;
-using BlazorCRUDApp.Server.Repository;
-using BlazorCRUDApp.Server.Services;
+using SOMSBlazorApp.Server.AppDbContext;
 using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Server.Services;
-using SOMSBlazorApp.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 

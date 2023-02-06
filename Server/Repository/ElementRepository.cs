@@ -1,8 +1,8 @@
-﻿using BlazorCRUDApp.Server.AppDbContext;
+﻿using SOMSBlazorApp.Server.AppDbContext;
 using SOMSBlazorApp.Server.Repository;
 using SOMSBlazorApp.Shared;
 
-namespace BlazorCRUDApp.Server.Repository
+namespace SOMSBlazorApp.Server.Repository
 {
     public class ElementRepository : IElementRepository
     {

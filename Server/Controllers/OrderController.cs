@@ -1,5 +1,5 @@
-﻿using BlazorCRUDApp.Server.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SOMSBlazorApp.Server.Services;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Controllers
@@ -8,8 +8,8 @@ namespace SOMSBlazorApp.Server.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IService<Order> _windowService;
-        public OrderController(IService<Order> windowService)
+        private readonly IOrderService _windowService;
+        public OrderController(IOrderService windowService)
         {
             _windowService = windowService;
         }
