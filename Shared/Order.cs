@@ -13,5 +13,7 @@ namespace SOMSBlazorApp.Shared
         public string OrderName { get; set; }
         [Required]
         public string State { get; set; }
+        public Window? Window { get; set; }
+        public int WindowId { get; set; }
     }
 }

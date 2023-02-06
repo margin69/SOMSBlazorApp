@@ -1,0 +1,49 @@
+﻿@page "/windowlist"
+@using SOMSBlazorApp.Shared
+
+@inject HttpClient _httpClient
+
+<h1>Window Detail</h1>
+<div>
+    <a href="/addwindow"> Create New Window</a>
+    @if (windowList != null)
+    {
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th width="10%">WindowId</th>
+                    <th width="20%">Name</th>
+                    <th width="20%">Quantity</th>
+                    <th width="20%">Element</th>
+                    <th width="30%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in windowList)
+                {
+                    <tr>
+                        <td>
+                            @p.Id
+                        </td>
+                        <td>@p.WindowName</td>
+                        <td>@p.QuantityOfElement</td>
+                        <td>@p.Element.ElementType</td>
+                        <td>
+                            <a href="/editwindow/@p.Id">Edit</a> |
+                            <a href="/deletewindow/@p.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+@code {
+    List<Window> windowList = new List<Window>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/window");
+        response.EnsureSuccessStatusCode();
+        windowList = await response.Content.ReadFromJsonAsync<List<Window>>();
+    }
+}

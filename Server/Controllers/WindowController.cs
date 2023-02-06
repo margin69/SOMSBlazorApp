@@ -1,5 +1,6 @@
 ﻿using BlazorCRUDApp.Server.Services;
 using Microsoft.AspNetCore.Mvc;
+using SOMSBlazorApp.Server.Services;
 using SOMSBlazorApp.Shared;
 
 namespace SOMSBlazorApp.Server.Controllers
@@ -8,8 +9,8 @@ namespace SOMSBlazorApp.Server.Controllers
     [ApiController]
     public class WindowController : ControllerBase
     {
-        private readonly IService<Window> _windowService;
-        public WindowController(IService<Window> windowService)
+        private readonly IWindowService _windowService;
+        public WindowController(IWindowService windowService)
         {
             _windowService = windowService;
         }
