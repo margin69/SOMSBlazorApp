@@ -25,7 +25,7 @@ namespace SOMSBlazorApp.Server.Repository
 
         public async Task<List<Window>> GetAllAsync()
         {
-            return await _dbContext.Windows.ToListAsync();
+            return await _dbContext.Windows.Include(p=>p.Element).ToListAsync();
         }
 
         public async Task<Window> GetByIdAsync(int Id)

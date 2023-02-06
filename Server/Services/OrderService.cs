@@ -23,6 +23,7 @@ namespace SOMSBlazorApp.Server.Services
             {
                 data.OrderName = order.OrderName;
                 data.State = order.State;
+                data.WindowId= order.WindowId;
                 await _order.UpdateAsync(data);
                 return true;
             }

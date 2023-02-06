@@ -1,0 +1,81 @@
+﻿@page "/editwindow/{Id}"
+@using SOMSBlazorApp.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+
+<h2>Add Window</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> Window Name *</label>
+            <input form="FirstName" class="form-control" @bind="@window.WindowName" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="LastName"> Quantity *</label>
+            <input form="LastName" class="form-control" @bind="@window.QuantityOfElement" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Email"> Select Window *</label>
+            <select for="Publisher" class="form-control"
+                    @bind="@window.ElementId">
+                <option value=0 disabled selected hidden>
+                    [Select Window]
+                </option>
+                @foreach (var item in elements)
+                {
+                    <option value="@item.Id">
+                        @item.ElementType
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Window window = new Window();
+    List<Element> elements = new List<Element>();
+    protected override async Task OnInitializedAsync()
+    {
+        window = await Http.GetFromJsonAsync<Window>("api/window/" + Id);
+
+        var response = await Http.GetAsync("api/element");
+        response.EnsureSuccessStatusCode();
+        elements = await response.Content.ReadFromJsonAsync<List<Element>>();
+        
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PutAsJsonAsync("api/window/" + Id, @window);
+        bool windowResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (windowResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
+            NavigationManager.NavigateTo("windowlist");
+        }
+
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("windowlist");
+    }
+
+}
+
