@@ -9,8 +9,19 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            <label for="FirstName"> Element Type *</label>
-            <input form="FirstName" class="form-control" @bind="@element.ElementType" />
+            <label for="Email"> Select Window *</label>
+            <select for="Publisher" class="form-control"
+                    @bind="@element.WindowId">
+                <option value=0 disabled selected hidden>
+                    [Select Window]
+                </option>
+                @foreach (var item in windows)
+                {
+                    <option value="@item.Id">
+                        @item.WindowName
+                    </option>
+                }
+            </select>
         </div>
     </div>
     <div class="col-md-6">
@@ -36,9 +47,13 @@
 </div>
 @code {
     Element element = new Element();
+    List<Window> windows = new List<Window>();
+
     protected override async Task OnInitializedAsync()
     {
-
+        var response = await Http.GetAsync("api/window");
+        response.EnsureSuccessStatusCode();
+        windows = await response.Content.ReadFromJsonAsync<List<Window>>();
     }
     protected async Task Save()
     {

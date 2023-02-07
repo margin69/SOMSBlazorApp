@@ -4,7 +4,7 @@
 
 namespace SOMSBlazorApp.Server.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,19 +12,18 @@ namespace SOMSBlazorApp.Server.Migrations
                 name: "dbo");
 
             migrationBuilder.CreateTable(
-                name: "Element",
+                name: "Order",
                 schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ElementType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Width = table.Column<int>(type: "int", nullable: false),
-                    Height = table.Column<int>(type: "int", nullable: false)
+                    OrderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Element", x => x.Id);
+                    table.PrimaryKey("PK_Order", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,36 +35,36 @@ namespace SOMSBlazorApp.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WindowName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuantityOfElement = table.Column<int>(type: "int", nullable: false),
-                    ElementId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Window", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Window_Element_ElementId",
-                        column: x => x.ElementId,
+                        name: "FK_Window_Order_OrderId",
+                        column: x => x.OrderId,
                         principalSchema: "dbo",
-                        principalTable: "Element",
+                        principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Element",
                 schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Width = table.Column<int>(type: "int", nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
                     WindowId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Element", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Window_WindowId",
+                        name: "FK_Element_Window_WindowId",
                         column: x => x.WindowId,
                         principalSchema: "dbo",
                         principalTable: "Window",
@@ -74,22 +73,22 @@ namespace SOMSBlazorApp.Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_WindowId",
+                name: "IX_Element_WindowId",
                 schema: "dbo",
-                table: "Order",
+                table: "Element",
                 column: "WindowId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Window_ElementId",
+                name: "IX_Window_OrderId",
                 schema: "dbo",
                 table: "Window",
-                column: "ElementId");
+                column: "OrderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Order",
+                name: "Element",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -97,7 +96,7 @@ namespace SOMSBlazorApp.Server.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "Element",
+                name: "Order",
                 schema: "dbo");
         }
     }

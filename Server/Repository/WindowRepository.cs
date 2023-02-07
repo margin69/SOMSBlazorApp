@@ -25,12 +25,12 @@ namespace SOMSBlazorApp.Server.Repository
 
         public async Task<List<Window>> GetAllAsync()
         {
-            return await _dbContext.Windows.Include(p=>p.Element).ToListAsync();
+            return await _dbContext.Windows.Include(p=>p.Order).ToListAsync();
         }
 
         public async Task<Window> GetByIdAsync(int Id)
         {
-            return await _dbContext.Windows.Include(p=>p.Element).FirstOrDefaultAsync(x => x.Id == Id);
+            return await _dbContext.Windows.FirstOrDefaultAsync(x => x.Id == Id);
         }
 
         public async Task DeleteAsync(int id)

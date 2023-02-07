@@ -20,7 +20,7 @@
             <input form="LastName" class="form-control" @bind="@order.State" />
         </div>
     </div>
-    <div class="col-md-6">
+    @*<div class="col-md-6">
         <div class="form-group">
             <label for="Email"> Select Window *</label>
             <select for="Publisher" class="form-control"
@@ -36,7 +36,7 @@
                 }
             </select>
         </div>
-    </div>
+    </div>*@
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -51,15 +51,10 @@
     [Parameter]
     public string Id { get; set; }
     Order order = new Order();
-    List<Window> windows = new List<Window>();
+    
     protected override async Task OnInitializedAsync()
     {
         order = await Http.GetFromJsonAsync<Order>("api/order/" + Id);
-
-        var response = await Http.GetAsync("api/window");
-        response.EnsureSuccessStatusCode();
-        windows = await response.Content.ReadFromJsonAsync<List<Window>>();
-
     }
     protected async Task Save()
     {

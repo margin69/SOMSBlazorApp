@@ -29,17 +29,18 @@ namespace SOMSBlazorApp.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ElementType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
                     b.Property<int>("Width")
                         .HasColumnType("int");
 
+                    b.Property<int>("WindowId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WindowId");
 
                     b.ToTable("Element", "dbo");
                 });
@@ -60,12 +61,7 @@ namespace SOMSBlazorApp.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WindowId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WindowId");
 
                     b.ToTable("Order", "dbo");
                 });
@@ -78,7 +74,7 @@ namespace SOMSBlazorApp.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ElementId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuantityOfElement")
@@ -90,12 +86,12 @@ namespace SOMSBlazorApp.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ElementId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Window", "dbo");
                 });
 
-            modelBuilder.Entity("SOMSBlazorApp.Shared.Order", b =>
+            modelBuilder.Entity("SOMSBlazorApp.Shared.Element", b =>
                 {
                     b.HasOne("SOMSBlazorApp.Shared.Window", "Window")
                         .WithMany()
@@ -108,13 +104,13 @@ namespace SOMSBlazorApp.Server.Migrations
 
             modelBuilder.Entity("SOMSBlazorApp.Shared.Window", b =>
                 {
-                    b.HasOne("SOMSBlazorApp.Shared.Element", "Element")
+                    b.HasOne("SOMSBlazorApp.Shared.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("ElementId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Element");
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

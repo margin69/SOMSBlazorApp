@@ -10,10 +10,11 @@ namespace SOMSBlazorApp.Shared
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string ElementType { get; set; }
-        [Required]
         public int Width { get; set; }
         [Required]
         public int Height { get; set; }
+
+        public Window? Window { get; set; }
+        public int WindowId { get; set; }
     }
 }

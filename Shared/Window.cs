@@ -13,7 +13,7 @@ namespace SOMSBlazorApp.Shared
         public string WindowName { get; set; }
         [Required]
         public int QuantityOfElement { get; set; }
-        public Element? Element { get; set; }
-        public int ElementId { get; set; }
+        public Order? Order { get; set; }
+        public int OrderId { get; set; }
     }
 }

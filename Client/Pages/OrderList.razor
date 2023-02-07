@@ -15,7 +15,6 @@
                         <th width="10%">OrderId</th>
                         <th width="20%">Name</th>
                         <th width="20%">State</th>
-                       @* <th width="20%">Window</th>*@
                         <th width="30%">Action</th>
                     </tr>
                 </thead>
@@ -27,8 +26,7 @@
                                 @p.Id
                             </td>
                             <td>@p.OrderName</td>
-                            <td>@p.State</td>
-                            @*<td>@p.Window.WindowName</td>*@
+                            <td>@p.State</td>                          
                             <td>
                                 <a href="/editorder/@p.Id">Edit</a> |
                                 <a href="/deleteorder/@p.Id">Delete</a>

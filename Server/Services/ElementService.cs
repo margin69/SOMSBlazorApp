@@ -22,7 +22,7 @@ namespace SOMSBlazorApp.Server.Services
 
             if (data != null)
             {
-                data.ElementType = element.ElementType;
+                data.WindowId = element.WindowId;
                 data.Width = element.Width;
                 data.Height = element.Height;
                 await _element.UpdateAsync(data);

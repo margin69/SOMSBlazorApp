@@ -23,7 +23,7 @@ namespace SOMSBlazorApp.Server.Services
             {
                 data.WindowName = window.WindowName;
                 data.QuantityOfElement = window.QuantityOfElement;
-                data.ElementId= window.ElementId;
+                data.OrderId= window.OrderId;
                 await _window.UpdateAsync(data);
                 return true;
             }

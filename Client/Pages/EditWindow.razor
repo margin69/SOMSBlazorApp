@@ -22,16 +22,16 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            <label for="Email"> Select Element *</label>
+            <label for="Email"> Select Order *</label>
             <select for="Publisher" class="form-control"
-                    @bind="@window.ElementId">
+                    @bind="@window.OrderId">
                 <option value=0 disabled selected hidden>
-                    [Select Element]
+                    [Select Order]
                 </option>
-                @foreach (var item in elements)
+                @foreach (var item in orders)
                 {
                     <option value="@item.Id">
-                        @item.ElementType
+                        @item.OrderName
                     </option>
                 }
             </select>
@@ -51,14 +51,15 @@
     [Parameter]
     public string Id { get; set; }
     Window window = new Window();
-    List<Element> elements = new List<Element>();
+    List<Order> orders = new List<Order>();
+
     protected override async Task OnInitializedAsync()
     {
         window = await Http.GetFromJsonAsync<Window>("api/window/" + Id);
 
-        var response = await Http.GetAsync("api/element");
+        var response = await Http.GetAsync("api/order");
         response.EnsureSuccessStatusCode();
-        elements = await response.Content.ReadFromJsonAsync<List<Element>>();
+        orders = await response.Content.ReadFromJsonAsync<List<Order>>();
         
     }
     protected async Task Save()
